@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.use("/criar", fichaRouter);
+app.use("/ficha", fichaRouter);
 app.use("/infos", infosRouter);
 
 // Opcional: Rota de teste para ver se o servidor está vivo

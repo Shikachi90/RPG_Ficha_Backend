@@ -30,7 +30,17 @@ router.post("/", async (req, res) => {
     );
   }
 
-  const response = await criarFicha(dados);
+  const tracos = dados.traços;
+
+  console.log("tracos === " + tracos);
+
+  let { tracosPositivos, tracosNegativos } = [];
+
+  // for (let i = 0; i < dados.traços.length; i++) {
+  //   tracosPositivos.push(dados.tracosPositivos[i]);
+  // }
+
+  // const response = await criarFicha(dados);
 
   if (response.status !== 200) {
     console.log(

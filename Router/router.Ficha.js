@@ -22,35 +22,40 @@ router.post("/", async (req, res) => {
 
   for (const key in req.body) {
     const keyB = key;
-    console.log("KeyB === " + keyB);
-    console.log(`${keyB}: ${req.body[keyB]}`);
     dados[keyB] = req.body[keyB];
-    console.log(
-      `dados:  Key: ${Object.keys(dados)} Valor: ${Object.values(dados)}`,
-    );
   }
 
-  const tracos = dados.traços;
+  let tracos = dados.traços;
 
-  console.log("tracos === " + tracos);
+  let tracosPositivos = [];
+  let tracosNegativos = [];
 
-  let { tracosPositivos, tracosNegativos } = [];
+  for (let i = 0; i < tracos.length; i++) {
+    if (tracos[i].categoria === "pos") {
+      tracosPositivos.push(tracos[i]);
+    } else if (tracos[i].categoria === "neg") {
+      tracosNegativos.push(tracos[i]);
+    }
+  }
 
-  // for (let i = 0; i < dados.traços.length; i++) {
-  //   tracosPositivos.push(dados.tracosPositivos[i]);
-  // }
+  dados.tracosPositivos = tracosPositivos;
+  dados.tracosNegativos = tracosNegativos;
 
-  // const response = await criarFicha(dados);
+  const response = await criarFicha(dados);
+  //  const response = {
+  //    status: 200,
+  //    response: tracos,
+  //  };
 
   if (response.status !== 200) {
     console.log(
-      `Resposta é  Status: '${response.status}', Error: '${response.error}'`,
+      `Resposta é Status: '${response.status}', Error: '${response.error}'`,
     );
     return res.status(response.status).json(response.error);
   }
 
   console.log(
-    `Resposta é  Status: '${response.status}', Resposta é '${response.response}'`,
+    `Resposta é Status: '${response.status}', Resposta é '${response.response}'`,
   );
   return res.status(response.status).json(response.response);
 }); // Aonde mostra a ficha completa

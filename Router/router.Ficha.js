@@ -42,10 +42,6 @@ router.post("/", async (req, res) => {
   dados.tracosNegativos = tracosNegativos;
 
   const response = await criarFicha(dados);
-  //  const response = {
-  //    status: 200,
-  //    response: tracos,
-  //  };
 
   if (response.status !== 200) {
     console.log(
